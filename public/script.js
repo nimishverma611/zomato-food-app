@@ -1,4 +1,9 @@
-let cartCount = 0;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+  document.getElementById("cart-count").innerText = cart.length;
+}
 
 fetch("/api/foods")
   .then(res => res.json())
@@ -13,14 +18,19 @@ fetch("/api/foods")
         <img src="${food.image}">
         <h3>${food.name}</h3>
         <p>₹${food.price}</p>
-        <button onclick="addToCart()">Add to Cart</button>
+        <button onclick='addToCart(${JSON.stringify(food)})'>
+          Add to Cart
+        </button>
       `;
 
       foodList.appendChild(card);
     });
+
+    saveCart();
   });
 
-function addToCart() {
-  cartCount++;
-  document.getElementById("cart-count").innerText = cartCount;
+function addToCart(food) {
+  cart.push(food);
+  saveCart();
+  alert(food.name + " added to cart");
 }
