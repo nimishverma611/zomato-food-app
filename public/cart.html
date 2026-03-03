@@ -9,10 +9,13 @@
   </style>
 </head>
 <body>
-
 <h1>Your Cart 🛒</h1>
+
 <div id="cart-items"></div>
+
 <h2 id="total"></h2>
+
+<button id="checkoutBtn" onclick="checkout()">Proceed to Checkout</button>
 
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -24,11 +27,21 @@ cart.forEach(item => {
   let p = document.createElement("p");
   p.innerText = item.name + " - ₹" + item.price;
   cartItemsDiv.appendChild(p);
-
   total += Number(item.price);
 });
 
 document.getElementById("total").innerText = "Total: ₹" + total;
+
+// Hide button if cart empty
+if (cart.length === 0) {
+  document.getElementById("checkoutBtn").style.display = "none";
+}
+
+function checkout() {
+  alert("Order placed successfully 🎉");
+  localStorage.removeItem("cart");
+  window.location.href = "home.html";
+}
 </script>
 
 </body>
