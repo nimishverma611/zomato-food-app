@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Cart</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .item { border-bottom: 1px solid #ccc; padding: 10px 0; }
+    button { padding: 10px; background: #e23744; color: white; border: none; }
+  </style>
+</head>
+<body>
+
+<h1>Your Cart 🛒</h1>
+<div id="cart-items"></div>
+
+<h2 id="total"></h2>
+
+<button onclick="checkout()">Proceed to Checkout</button>
+
+<script>
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartDiv = document.getElementById("cart-items");
+  let total = 0;
+
+  cart.forEach(item => {
+    total += item.price;
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `${item.name} - ₹${item.price}`;
+    cartDiv.appendChild(div);
+  });
+
+  document.getElementById("total").innerText = "Total: ₹" + total;
+
+  function checkout() {
+    window.location.href = "/checkout.html";
+  }
+</script>
+
+</body>
+</html>
