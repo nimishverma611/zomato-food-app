@@ -96,6 +96,20 @@ header a {
   cursor: pointer;
   transition: 0.3s;
 }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #e23744;
+  color: white;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
 
 .home-btn:hover {
   background: #c91c2c;
