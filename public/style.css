@@ -110,7 +110,16 @@ header a {
   text-decoration: none;
   font-weight: bold;
 }
-
+.home-btn {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 12px 25px;
+  background: #e23744;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
 .home-btn:hover {
   background: #c91c2c;
 }
