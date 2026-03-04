@@ -62,14 +62,15 @@
 <body>
 
 <div class="payment-box">
-  <h2>Payment Details 💳</h2>
+<h2>Select Payment Method 💳</h2>
 
-  <input type="text" placeholder="Card Number" id="card">
-  <input type="text" placeholder="Card Holder Name" id="holder">
-  <input type="text" placeholder="Expiry (MM/YY)" id="expiry">
-  <input type="text" placeholder="CVV" id="cvv">
+<div class="methods">
+  <button onclick="selectMethod('Card')">💳 Card</button>
+  <button onclick="selectMethod('UPI')">📱 UPI</button>
+  <button onclick="selectMethod('COD')">💵 Cash on Delivery</button>
+</div>
 
-  <button onclick="payNow()">Pay Now</button>
+<div id="payment-form"></div>
 </div>
 
 <script>
