@@ -1,27 +1,62 @@
-const express = require("express");
-const path = require("path");
+<script>
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+let selectedMethod = "";
 
-app.use(express.static("public"));
-app.use(express.json());
+function selectMethod(method){
+  selectedMethod = method;
 
-const foods = [
-  { id: 1, name: "Pizza", price: 199, image: "https://i.imgur.com/eVm7m1O.png" },
-  { id: 2, name: "Burger", price: 99, image: "https://i.imgur.com/5Aqgz7o.png" },
-  { id: 3, name: "Biryani", price: 249, image: "https://i.imgur.com/7YV1F3K.png" },
-  { id: 4, name: "Pasta", price: 179, image: "https://i.imgur.com/dzGJZ5v.png" }
-];
+  let form = document.getElementById("payment-form");
 
-app.get("/api/foods", (req, res) => {
-  res.json(foods);
-});
+  if(method === "Card"){
+    form.innerHTML = `
+      <input placeholder="Card Number">
+      <input placeholder="Card Holder Name">
+      <input placeholder="Expiry (MM/YY)">
+      <input placeholder="CVV">
+      <button onclick="payNow()">Pay Now</button>
+    `;
+  }
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+  if(method === "UPI"){
+    form.innerHTML = `
+      <input placeholder="Enter UPI ID">
+      <button onclick="payNow()">Pay Now</button>
+    `;
+  }
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  if(method === "COD"){
+    form.innerHTML = `
+      <p style="margin-bottom:15px;">Pay when order arrives 🚚</p>
+      <button onclick="payNow()">Confirm Order</button>
+    `;
+  }
+}
+
+function payNow() {
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let delivery = JSON.parse(localStorage.getItem("deliveryDetails"));
+
+  if(cart.length === 0){
+    alert("Cart is empty ❌");
+    return;
+  }
+
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+  orders.push({
+    items: cart,
+    delivery: delivery,
+    payment: selectedMethod,
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("orders", JSON.stringify(orders));
+  localStorage.removeItem("cart");
+
+  alert("🎉 Payment Successful!\nOrder Confirmed");
+
+  window.location.href = "tracking.html";
+}
+
+</script>
