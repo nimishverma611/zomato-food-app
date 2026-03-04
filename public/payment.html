@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .payment-box {
+      background: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      animation: slideUp 0.6s ease;
+    }
+
+    .payment-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #764ba2;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #764ba2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #5a3c8c;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="payment-box">
+  <h2>Payment Details 💳</h2>
+
+  <input type="text" placeholder="Card Number" id="card">
+  <input type="text" placeholder="Card Holder Name" id="holder">
+  <input type="text" placeholder="Expiry (MM/YY)" id="expiry">
+  <input type="text" placeholder="CVV" id="cvv">
+
+  <button onclick="payNow()">Pay Now</button>
+</div>
+
+<script>
+function payNow() {
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let delivery = JSON.parse(localStorage.getItem("deliveryDetails"));
+
+  if(cart.length === 0){
+    alert("Cart is empty ❌");
+    return;
+  }
+
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+  orders.push({
+    items: cart,
+    delivery: delivery,
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("orders", JSON.stringify(orders));
+  localStorage.removeItem("cart");
+
+  alert("🎉 Payment Successful!\nOrder Confirmed");
+
+  window.location.href = "orders.html";
+}
+</script>
+
+</body>
+</html>
