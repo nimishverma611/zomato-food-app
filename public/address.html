@@ -91,9 +91,15 @@ function placeOrder() {
 
   alert("🎉 Order Placed Successfully!\n\nThank you " + name);
 
-  localStorage.removeItem("cart");
+localStorage.setItem("deliveryDetails", JSON.stringify({
+  name,
+  phone,
+  address,
+  city,
+  pincode
+}));
 
-  window.location.href = "home.html";
+window.location.href = "payment.html";
 }
 </script>
 
