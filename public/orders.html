@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order History</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #e23744;
+    }
+
+    .order-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .order-card h3 {
+      margin: 0 0 10px;
+      color: #333;
+    }
+
+    .order-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Your Orders 📦</h1>
+
+<div id="orders-container"></div>
+
+<script>
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+let container = document.getElementById("orders-container");
+
+if(orders.length === 0){
+  container.innerHTML = "<p>No orders yet 😢</p>";
+}
+
+orders.reverse().forEach(order => {
+
+  let card = document.createElement("div");
+  card.className = "order-card";
+
+  let itemsText = order.items.map(i => i.name + " (₹" + i.price + ")").join(", ");
+
+  card.innerHTML = `
+    <h3>Order Date: ${order.date}</h3>
+    <p><strong>Items:</strong> ${itemsText}</p>
+    <p><strong>Delivered To:</strong> ${order.delivery.name}, ${order.delivery.address}, ${order.delivery.city} - ${order.delivery.pincode}</p>
+  `;
+
+  container.appendChild(card);
+});
+</script>
+
+</body>
+</html>
