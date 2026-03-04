@@ -15,7 +15,13 @@
 
 <h2 id="total"></h2>
 
-<button id="checkoutBtn" onclick="checkout()">Proceed to Checkout</button>
+<button id="checkoutBtn" onclick="goToAddress()">Proceed to Checkout</button>
+
+<script>
+function goToAddress() {
+  window.location.href = "address.html";
+}
+</script>
 
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
