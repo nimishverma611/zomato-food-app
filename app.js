@@ -57,9 +57,11 @@ function payNow() {
   alert("🎉 Payment Successful!\nOrder Confirmed");
 
   window.location.href = "tracking.html";
-  function toggleDark(){
-  document.body.classList.toggle("dark");
 }
+
+/* ✅ DARK MODE FUNCTION (OUTSIDE) */
+function toggleDark(){
+  document.body.classList.toggle("dark");
 }
 
 </script>
