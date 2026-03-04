@@ -1,5 +1,3 @@
-<script>
-
 let selectedMethod = "";
 
 function selectMethod(method){
@@ -59,9 +57,6 @@ function payNow() {
   window.location.href = "tracking.html";
 }
 
-/* ✅ DARK MODE FUNCTION (OUTSIDE) */
 function toggleDark(){
   document.body.classList.toggle("dark");
 }
-
-</script>
