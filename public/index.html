@@ -4,6 +4,11 @@
 <title>Food Ordering</title>
 <link rel="stylesheet" href="style.css">
 <script src="script.js"></script>
+  <script>
+if(localStorage.getItem("loggedIn") !== "true"){
+window.location.href = "login.html";
+}
+</script>
 </head>
 
 <body onload="updateCartCount()">
