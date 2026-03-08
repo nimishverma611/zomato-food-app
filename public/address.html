@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Delivery Address</title>
+<title>Address</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-<h1>Delivery Address</h1>
-</header>
-
 <div class="container">
+
+<h2>Delivery Address</h2>
 
 <input id="name" placeholder="Full Name"><br><br>
 <input id="address" placeholder="Address"><br><br>
 <input id="city" placeholder="City"><br><br>
 <input id="pincode" placeholder="Pincode"><br><br>
 
-<button onclick="saveAddress()">Continue To Payment</button>
+<button onclick="saveAddress()">Continue</button>
 
 </div>
 
@@ -26,14 +24,14 @@
 
 function saveAddress(){
 
-let address={
+let data={
 name:document.getElementById("name").value,
 address:document.getElementById("address").value,
 city:document.getElementById("city").value,
 pincode:document.getElementById("pincode").value
 };
 
-localStorage.setItem("delivery",JSON.stringify(address));
+localStorage.setItem("delivery",JSON.stringify(data));
 
 window.location.href="payment.html";
 }
