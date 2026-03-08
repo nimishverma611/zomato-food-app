@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Orders</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<h1>Your Orders</h1>
+</header>
+
+<a href="index.html" class="home-btn">🏠 Go To Home</a>
+
+<div class="container">
+<div id="orders-container"></div>
+</div>
+
+<script>
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+let container = document.getElementById("orders-container");
+
+if(orders.length === 0){
+container.innerHTML="No orders yet";
+}
+
+orders.reverse().forEach(order=>{
+
+let div=document.createElement("div");
+div.className="order-card";
+
+let items = order.items.map(i=>i.name + " ₹" + i.price).join(", ");
+
+div.innerHTML=`
+<h3>${order.date}</h3>
+<p><b>Items:</b> ${items}</p>
+<p><b>Deliver To:</b> ${order.delivery.name}, ${order.delivery.address}</p>
+`;
+
+container.appendChild(div);
+
+});
+
+</script>
+
+</body>
+</html>
