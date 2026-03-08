@@ -7,36 +7,31 @@
 
 <body>
 
-<header>
 <h1>Your Orders</h1>
-</header>
 
-<a href="index.html" class="home-btn">🏠 Go To Home</a>
+<a href="index.html" class="home-btn">🏠 Home</a>
 
-<div class="container">
-<div id="orders-container"></div>
-</div>
+<div id="orders"></div>
 
 <script>
 
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
-let container = document.getElementById("orders-container");
-
-if(orders.length === 0){
-container.innerHTML="No orders yet";
-}
+let container = document.getElementById("orders");
 
 orders.reverse().forEach(order=>{
 
 let div=document.createElement("div");
-div.className="order-card";
 
-let items = order.items.map(i=>i.name + " ₹" + i.price).join(", ");
+let items = order.items.map(i=>i.name+" ₹"+i.price).join(", ");
+
+div.className="cart-item";
 
 div.innerHTML=`
-<h3>${order.date}</h3>
-<p><b>Items:</b> ${items}</p>
-<p><b>Deliver To:</b> ${order.delivery.name}, ${order.delivery.address}</p>
+<div>
+<b>${order.date}</b><br>
+${items}<br>
+${order.delivery.name}, ${order.delivery.address}
+</div>
 `;
 
 container.appendChild(div);
