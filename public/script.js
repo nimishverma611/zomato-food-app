@@ -1,32 +1,62 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function addToCart(name, price){
-  cart.push({name, price});
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert("Added to cart");
+function updateCartCount(){
+let count = document.getElementById("cart-count");
+if(count){
+count.innerText = cart.length;
+}
+}
+
+function addToCart(name,price){
+
+cart.push({name,price});
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+updateCartCount();
+
+alert(name + " added to cart");
 }
 
 function loadCart(){
 
-  let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-  let container = document.getElementById("cart-items");
+let container = document.getElementById("cart-items");
 
-  if(!container) return;
+if(!container) return;
 
-  if(cartItems.length === 0){
-    container.innerHTML = "Cart is empty";
-    return;
-  }
+container.innerHTML="";
 
-  let total = 0;
+let total = 0;
 
-  cartItems.forEach(item=>{
-    total += item.price;
+cart.forEach((item,index)=>{
 
-    let div = document.createElement("div");
-    div.innerHTML = item.name + " - ₹" + item.price;
-    container.appendChild(div);
-  });
+total += item.price;
 
-  document.getElementById("total").innerText = "Total: ₹" + total;
+let div = document.createElement("div");
+
+div.className="cart-item";
+
+div.innerHTML=`
+<span>${item.name} - ₹${item.price}</span>
+<button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+`;
+
+container.appendChild(div);
+
+});
+
+document.getElementById("total").innerText="Total: ₹"+total;
+
+}
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+loadCart();
+
+updateCartCount();
+
 }
