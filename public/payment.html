@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Payment</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<h1>Payment</h1>
+</header>
+
+<div class="container">
+
+<button onclick="placeOrder()">Cash On Delivery</button>
+
+</div>
+
+<script>
+
+function placeOrder(){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let delivery = JSON.parse(localStorage.getItem("delivery"));
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+orders.push({
+items:cart,
+delivery:delivery,
+date:new Date().toLocaleString()
+});
+
+localStorage.setItem("orders",JSON.stringify(orders));
+
+localStorage.removeItem("cart");
+
+window.location.href="orders.html";
+
+}
+
+</script>
+
+</body>
+</html>
