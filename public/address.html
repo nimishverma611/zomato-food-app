@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Delivery Address</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<h1>Delivery Address</h1>
+</header>
+
+<div class="container">
+
+<input id="name" placeholder="Full Name"><br><br>
+<input id="address" placeholder="Address"><br><br>
+<input id="city" placeholder="City"><br><br>
+<input id="pincode" placeholder="Pincode"><br><br>
+
+<button onclick="saveAddress()">Continue To Payment</button>
+
+</div>
+
+<script>
+
+function saveAddress(){
+
+let address={
+name:document.getElementById("name").value,
+address:document.getElementById("address").value,
+city:document.getElementById("city").value,
+pincode:document.getElementById("pincode").value
+};
+
+localStorage.setItem("delivery",JSON.stringify(address));
+
+window.location.href="payment.html";
+}
+
+</script>
+
+</body>
+</html>
